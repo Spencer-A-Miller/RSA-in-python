@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 '''RSA.py'''
 
-
 # LARGE PRIME NUMBER GENERATION FOR RSA
 
 #Random number generation by calling nBitRandom(bitsize)
@@ -10,7 +9,7 @@
 
 import random
  
-# Pre generated primes
+# Pre generated primes. We want a prime candidate not divisible by the first primes.
 first_primes_list = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67,
           71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149,
           151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227,
@@ -32,7 +31,7 @@ def nBitRandom(L):
       return(random.randrange(2**(n-1)+1, (2**n)-1))
 
 def getLowLevelPrime(n):
-    '''Generate a prime candidate divisible
+    '''Generate a prime candidate not divisible
       by first primes'''
    
     # Repeat until a number satisfying
@@ -52,7 +51,7 @@ def getLowLevelPrime(n):
   #MILLER-RABIN TEST
   #20 iterations of Rabin Miller Primality test run here
   #Successfully passing this test once means there is a 75% chance the number is prime
-  #The pobability of the candidate prime number being not prime is 1/(2^128) after 20 successful tests. (Very low probabability)
+  #The pobability of the candidate prime number being not prime is 1/(2^128) after 20 successful tests. (Very low probability)
 
 def isMillerRabinPassed(miller_rabin_candidate):
 
@@ -172,29 +171,22 @@ print("d = ", d)
 print("e = ", e)
 
 # Cipher Text Generation
-
 def encrypt(msg, e, n):
   for i in range(len(msg)):
     msg[i] = pow(msg[i], e, n)
   return msg
 
 msg = "Hello RSA!"
-
 ascii_values = [ord(character) for character in msg]
-
 c = encrypt(ascii_values, e, n)
-
 print(c)
 
 # Decryption
-
 def decrypt(c, d, n):
   for i in range(len(c)):
     c[i] = pow(c[i], d, n)
   return msg
 
 #ascii_values = [ord(character) for character in msg]
-
 msg = decrypt(c, d, n)
-
 print(msg)
