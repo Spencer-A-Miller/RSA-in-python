@@ -9,7 +9,7 @@
 
 import random
 from first_primes_list import FirstPrimesManager
- 
+
 # Pre generated primes. We want a prime candidate not divisible by the first primes.
 primes = FirstPrimesManager()
 first_primes_list = primes.load_cache('primes_cache')
